@@ -83,3 +83,10 @@ def create_tokenized_df(base_df, remove_nao=True):
                                                                        stopword_list=stopwords,
                                                                        nlp_pipeline=nlp)
     return df
+
+def evaluate_words_lemmas(df_row):
+    """
+    Função auxiliar para converter strings de words/lemmas de volta em listas
+    Utilizado pois no csv tudo vira string
+    """
+    return eval(df_row['words']), eval(df_row['lemmas'])

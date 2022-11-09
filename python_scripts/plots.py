@@ -3,12 +3,16 @@ Arquivo para scripts de plots
 """
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
+import nltk
+import pandas as pd
+import seaborn as sns
+nltk.download('all', quiet=True)
 
 def plot_cloud(words_string):
     """
     Função para plotar nuvem de palavras
     """
-    nuvem_palavras = WordCloud(width= 1000, height= 800, max_font_size = 110, collocations= False).generate(words_string)
+    nuvem_palavras = WordCloud(width= 1000, height= 800, max_font_size = 110, collocations=False).generate(words_string)
     plt.figure(figsize=(12,8))
     plt.imshow(nuvem_palavras, interpolation='bilinear')
     plt.axis("off")

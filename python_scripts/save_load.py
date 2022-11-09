@@ -39,4 +39,4 @@ def save_to_s3_bucket(file_name, processado=False):
 
 def save_df_to_s3_bucket(df, file_name, processado=False):
     bucket = __get_bucket(processado)
-    df.to_csv(f's3://{bucket}/{file_name}')
+    df.to_csv(f's3://{bucket}/{file_name}', encoding='utf-8', index=False)
