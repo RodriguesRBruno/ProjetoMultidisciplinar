@@ -39,11 +39,13 @@ def tokenize_text_and_get_stats(text, nlp_pipeline, stopword_list=None):
             lemma_list.append(word.lemma)
             local_word_lengths.append(len(word.text))
 
-        sentence_lengths.append(len(local_word_list))
+        if local_word_list:
+            sentence_lengths.append(len(local_word_list))
 
-        word_list.extend(local_word_list)
-        avg_word_len = np.mean(local_word_lengths)
-        word_avg_lengths.append(avg_word_len)
+            word_list.extend(local_word_list)
+            avg_word_len = np.mean(local_word_lengths)
+            print(avg_word_len)
+            word_avg_lengths.append(avg_word_len)
     
     return word_list, lemma_list, np.mean(sentence_lengths), np.mean(word_avg_lengths)
 
@@ -77,7 +79,6 @@ def create_tokenized_df(base_df, remove_nao=True):
     stopwords = nltk.corpus.stopwords.words('portuguese')
     if remove_nao:
         stopwords.remove('não')
-    stopwords.append('r')
     df[['words', 'lemmas', 'avg_sent_len', 'avg_word_len']] = df.apply(tokenize_df_row_and_get_stats, axis=1,
                                                                        result_type='expand',
                                                                        stopword_list=stopwords,
