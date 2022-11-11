@@ -1,9 +1,11 @@
 """
 Arquivo para scripts referentes a salvar/carregar dados
 """
-
+import io
 import boto3
 import pandas as pd
+from sagemaker.amazon.common import write_spmatrix_to_sparse_tensor
+from sklearn.datasets import dump_svmlight_file
 
 BUCKET_BRUTOS = 'projetointerdisciplinardadosbrutos'
 BUCKET_PROCESSADOS = 'projetointerdisciplinardadosprocessados'
@@ -14,7 +16,7 @@ def __get_bucket(tipo='bruto'):
         return BUCKET_PROCESSADOS
     elif tipo == 'bruto':
         return BUCKET_BRUTOS
-    elif tipo == 'model':
+    elif tipo == 'modelo':
         return BUCKET_MODEL
     
 def load_df_from_bucket(file_name, tipo='bruto'):
@@ -42,3 +44,25 @@ def save_to_s3_bucket(file_name, tipo='bruto'):
 def save_df_to_s3_bucket(df, file_name, tipo='bruto'):
     bucket = __get_bucket(tipo)
     df.to_csv(f's3://{bucket}/{file_name}', encoding='utf-8', index=False)
+    
+    
+def save_sparse_vector_to_s3_bucket_as_recordio(spvec, filename, tipo='bruto'):
+
+    bucket = __get_bucket(tipo)
+    prefix = filename.split('.')[0]
+    data_location = f"{prefix}/{filename}"
+    buf = io.BytesIO()
+    write_spmatrix_to_sparse_tensor(buf,spvec)
+    buf.seek(0)
+    boto3.resource('s3').Bucket(bucket).Object(data_location).upload_fileobj(buf)
+    
+    
+def save_sparse_vector_to_s3_bucket_as_libsvm(x_values, y_values, filename, tipo='bruto'):
+
+    bucket = __get_bucket(tipo)
+    prefix = filename.split('.')[0]
+    data_location = f"{prefix}/{filename}"
+    buf = io.BytesIO()
+    dump_svmlight_file(x_values, y_values, buf)
+    buf.seek(0)
+    boto3.resource('s3').Bucket(bucket).Object(data_location).upload_fileobj(buf)
