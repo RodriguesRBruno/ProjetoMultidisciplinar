@@ -43,7 +43,8 @@ def save_to_s3_bucket(file_name, tipo='bruto'):
 
 def save_df_to_s3_bucket(df, file_name, prefix=None, tipo='bruto'):
     bucket = __get_bucket(tipo)
-    df.to_csv(f's3://{bucket}/{file_name}', encoding='utf-8', index=False)
+    if prefix is not None:
+        df.to_csv(f's3://{bucket}/{file_name}', encoding='utf-8', index=False)
     
     
 def save_sparse_vector_to_s3_bucket_as_recordio(spvec, filename, tipo='bruto'):
