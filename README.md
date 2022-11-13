@@ -1,5 +1,7 @@
 # Projeto Interdisciplinar: Machine Learning na Detecção de Fake News
 
+![](https://github.com/camilasp/ProjetoMultidisciplinar/blob/dev/images/banner.png)
+
 
 ##  Conteúdo:
 
