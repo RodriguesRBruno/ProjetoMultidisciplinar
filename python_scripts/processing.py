@@ -44,13 +44,12 @@ def tokenize_text_and_get_stats(text, nlp_pipeline, stopword_list=None):
 
             word_list.extend(local_word_list)
             avg_word_len = np.mean(local_word_lengths)
-            print(avg_word_len)
             word_avg_lengths.append(avg_word_len)
     
     return word_list, lemma_list, np.mean(sentence_lengths), np.mean(word_avg_lengths)
 
 
-def tokenize_df_row_and_get_stats(df_row, nlp_pipeline, stopword_list=None, n_print=100):
+def tokenize_df_row_and_get_stats(df_row, nlp_pipeline, stopword_list=None, n_print=500):
     """
     Função para tokenizar um texto localizado em uma linha de um DataFrame. 
     Texto deve etar na coluna 'text'
