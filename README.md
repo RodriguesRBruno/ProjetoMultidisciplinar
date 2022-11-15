@@ -21,8 +21,10 @@
 ## Resumo 
 <p>Trata-se do projeto interdisciplinar desenvolvido por alunos do 2º semestre do curso de Especialização em Ciência de Dados do Instituto Federal de São Paulo. O trabalho engloba os conceitos estudados na disciplina de Aprendizagem de Máquina e Reconhecimento de Padrões e na disciplina Tecnologias de Big Data. O objetivo do trabalho é praticar, utilizando uma base de dados, a aplicação de conceitos de aprendizagem de máquina na resolução de um problema, com processamento de algoritmos de Machine Learning em ambiente distribuído na AWS.</p>
 <p>O tema da base de dados escolhido pelo grupo foi Fake News, por se tratar de um problema atual, relevante e que demanda soluções, tendo em vista os problemas já causados pela disseminação de  informações falsas. Foram escolhidas bases de dados contendo notícias previamente categorizadas como falsas ou verdadeiras com o objetivo de criar uma solução de classificação automatizada dessas notícias, acelerando a detecção das fake news.</p>
+<p>Os dados foram salvos em um bucket na AWS S3, sendo pré-processados e tratados em notebooks no Sagemaker. Com os dados limpos, foi feita uma análise com visualização dos dados e por fim, os textos foram vetorizados para que pudessem ser utilizados em modelos de machine learning.</p>
+<p>Foram treinados modelos para os dois datasets separadamente afim de realizar uma avaliação. Como as bases isoladamente produziram modelos ruins, elas foram unificadas, aumentando assim a variedade de notícias. Os modelos unificados produziram resultados melhores.</p>
+<p> O melhor modelo foi o XXXX que obteve uma precisão de XXXX.</p>
 
-<h2> Falta incluir também info resumida da infra usada, algoritmos testados e resultados</h2>
 
 <a name="intro"></a>
 ## Introdução 
@@ -39,7 +41,7 @@
 
 <a name="dados"></a>
 ## Dados 
-<p> Os dados utilizados no treinamento e validação dos modelos desenvolvidos são corpus desenvolvidos em Língua Portuguesa já categorizados como noticía verdadeira ou falsa. Os dados foram obtidos das seguintes fontes:</p>
+<p> Os dados utilizados no treinamento e validação dos modelos desenvolvidos são corpus desenvolvidos em Língua Portuguesa já categorizados como noticía verdadeira ou falsa. Os dados estavam em repositórios dos projetos de que fazem parte - descrito abaixo - em arquivos do tipo csv e txt. Os dados foram obtidos das seguintes fontes:</p>
 
 * Fake.Br: trata-se de uma base de dados com 7200 notícias coletadas em 2018 de diferentes agências de notícias, na proporção de 1 notícia fake para 1 verdadeira. As notícias foram coletadas de forma semi-automática com uso de web crawlers, sendo analisadas e categorizadas pelos participantes do projeto. Mais informações podem ser encontradas [aqui](https://github.com/roneysco/Fake.br-Corpus) e [aqui](https://sites.icmc.usp.br/taspardo/OpenCor2018-SantosEtAl.pdf).
 * FakeRecogna: trata-se de uma base com 11,902 amostras de notícias, sendo a maior parte dos anos de 2020 e 2021, sendo que as notícias verdadeiras foram retiradas de sites de agências de notícias renomadas e as fake news foram colhidas de sites de agências de chegagem de fake news brasileiras, na proporção de 1 para 1. As notícias são de assuntos diversos, dentre os quais destacam-se entretenimento, saúde e política.
@@ -51,7 +53,11 @@ Mais informações podem ser obtidas no repositório do [projeto](https://github
 <a name="infra"></a>
 ## Arquitetura e Infraestrutura de Dados
 
-<h2>Incluir explicação do esquema na aws e o diagrama da solução</h2>
+Foi feito o upload dos dados para um bucket da Amazon S3. Os arquivos em txt de uma das bases foram processados em um notebook no Amazon Sagemaker e salvos em formato csv. Após esse tratamento, os csvs de ambas as bases foram preparados para visualização de dados e modelagem em outro notebook no sagemaker e salvos em um bucket de dados pré-processados. Utilizando os dados pré-processados, foi realizada uma análise de dados e a modelagem, em notebooks separados no Sagemaker. Os modelos treinados foram salvos em um terceiro bucket. Os códigos feitos nos notebooks no sagemaker foram disponibilizados no github.
+
+### Diagrama da Arquitetura de dados:
+
+![](https://github.com/camilasp/ProjetoMultidisciplinar/blob/dev/images/diagrama_arquitetura.png)
 
 <a name="prep"></a>
 ## Preparação dos dados
@@ -73,8 +79,20 @@ Abaixo, as nuvens de palavras de cada um dos datasets. Pode-se notar a variaçã
 <a name="model"></a>
 ## Modelagem e Validação
 
+Usamos como modelo base o XGBoost do Sagemaker.Primeiro, utilizamos os datasets separadamente para treinar dois modelos, usando como teste um dataset de testes da base treinada e também um dataset de teste da outra base. Quando testamos amostras de uma base no modelo treinado com amostras da outra base, os resultados não foram bons, enquanto que nos testes feitos com amostras das próprias bases, em cada caso, os resultados eram excelentes. A principal razão para isso é a diferença no conteúdo das bases, que apresentam notícias de períodos diferentes, sendo uma mais recente e mais abrangente.  
+
+Usamos então o XGBoost para treinar outro modelo, agora com todos os dados e os resultados obtidos foram muito bons. Aparentemente, o modelo conseguiu generalizar melhor.
+
+Foram treinados então outros modelos...
+* falta treinar outros modelos
+* falta a parte de validação cruzada/gridsearch
+
+Os notebooks com os modelos estão nos links abaixo:
+
 <a name="conclusao"></a>
 ## Conclusão
+
+Para garantir que o modelo está generalizando bem seria importante testar a classificação de notícias ainda mais recentes e verificar o desempenho das métricas novamente.
 
 <a name="ref"></a>
 ## Referências
@@ -89,5 +107,4 @@ Abaixo, as nuvens de palavras de cada um dos datasets. Pode-se notar a variaçã
 
 * Silva, Renato M., Santos R.L.S, Almeida T.A, and Pardo T.A.S. (2020) "Towards Automatically Filtering Fake News in Portuguese." Expert Systems with Applications, vol 146, p. 113199.
 
-* 
-[Banner Photo]( https://www.pexels.com/photo/white-and-black-letter-blocks-3989901/) by Joshua Miranda
+* [Banner Photo]( https://www.pexels.com/photo/white-and-black-letter-blocks-3989901/) by Joshua Miranda
