@@ -39,7 +39,7 @@
 
 <a name="dados"></a>
 ## Dados 
-<p> Os dados utilizados no treinamento e validação dos modelos desenvolvidos são corpus desenvolvidos em Língua Portuguesa já categorizados como noticía verdadeira ou falsa. Os dados foram obtidos das seguintes fontes:</p>
+<p> Os dados utilizados no treinamento e validação dos modelos desenvolvidos são corpus desenvolvidos em Língua Portuguesa já categorizados como noticía verdadeira ou falsa. Os dados estavam em repositórios dos projetos de que fazem parte - descrito abaixo - em arquivos do tipo csv e txt. Os dados foram obtidos das seguintes fontes:</p>
 
 * Fake.Br: trata-se de uma base de dados com 7200 notícias coletadas em 2018 de diferentes agências de notícias, na proporção de 1 notícia fake para 1 verdadeira. As notícias foram coletadas de forma semi-automática com uso de web crawlers, sendo analisadas e categorizadas pelos participantes do projeto. Mais informações podem ser encontradas [aqui](https://github.com/roneysco/Fake.br-Corpus) e [aqui](https://sites.icmc.usp.br/taspardo/OpenCor2018-SantosEtAl.pdf).
 * FakeRecogna: trata-se de uma base com 11,902 amostras de notícias, sendo a maior parte dos anos de 2020 e 2021, sendo que as notícias verdadeiras foram retiradas de sites de agências de notícias renomadas e as fake news foram colhidas de sites de agências de chegagem de fake news brasileiras, na proporção de 1 para 1. As notícias são de assuntos diversos, dentre os quais destacam-se entretenimento, saúde e política.
@@ -51,7 +51,11 @@ Mais informações podem ser obtidas no repositório do [projeto](https://github
 <a name="infra"></a>
 ## Arquitetura e Infraestrutura de Dados
 
-<h2>Incluir explicação do esquema na aws e o diagrama da solução</h2>
+Foi feito o upload dos dados para um bucket da Amazon S3. Os arquivos em txt de uma das bases foram processados em um notebook no Amazon Sagemaker e salvos em formato csv. Após esse tratamento, os csvs de ambas as bases foram preparados para visualização de dados e modelagem em outro notebook no sagemaker e salvos em um bucket de dados pré-processados. Utilizando os dados pré-processados, foi realizada uma análise de dados e a modelagem, em notebooks separados no Sagemaker. Os modelos treinados foram salvos em um terceiro bucket. Os códigos feitos nos notebooks no sagemaker foram disponibilizados no github.
+
+### Diagrama da Arquitetura de dados:
+
+![](https://github.com/camilasp/ProjetoMultidisciplinar/blob/dev/images/diagrama_arquitetura.png)
 
 <a name="prep"></a>
 ## Preparação dos dados
