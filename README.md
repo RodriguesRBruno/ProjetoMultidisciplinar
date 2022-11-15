@@ -41,9 +41,10 @@
 ## Dados 
 <p> Os dados utilizados no treinamento e validação dos modelos desenvolvidos são corpus desenvolvidos em Língua Portuguesa já categorizados como noticía verdadeira ou falsa. Os dados foram obtidos das seguintes fontes:</p>
 
-* FakeRecogna: trata-se de uma base com 11,902 amostras de notícias, sendo que as notícias verdadeiras foram retiradas de sites de agências de notícias renomadas e as fake news foram colhidas de sites de agências de chegagem de fake news brasileiras, na proporção de 1 para 1. As notícias são de assuntos diversos, dentre os quais destacam-se entretenimento, saúde e política.
+* Fake.Br: trata-se de uma base de dados com 7200 notícias coletadas em 2018 de diferentes agências de notícias, na proporção de 1 notícia fake para 1 verdadeira. As notícias foram coletadas de forma semi-automática com uso de web crawlers, sendo analisadas e categorizadas pelos participantes do projeto. Mais informações podem ser encontradas [aqui](https://github.com/roneysco/Fake.br-Corpus) e [aqui](https://sites.icmc.usp.br/taspardo/OpenCor2018-SantosEtAl.pdf).
+* FakeRecogna: trata-se de uma base com 11,902 amostras de notícias, sendo a maior parte dos anos de 2020 e 2021, sendo que as notícias verdadeiras foram retiradas de sites de agências de notícias renomadas e as fake news foram colhidas de sites de agências de chegagem de fake news brasileiras, na proporção de 1 para 1. As notícias são de assuntos diversos, dentre os quais destacam-se entretenimento, saúde e política.
 Mais informações podem ser obtidas no repositório do [projeto](https://github.com/Gabriel-Lino-Garcia/FakeRecogna).
-* Fake.Br: trata-se de uma base de dados com 7200 notícias coletadas de diferenetes agências de notícias, na proporção de 1 notícia fake para 1 verdadeira. As notícias foram coletadas de forma semi-automática com uso de web crawlers, sendo analisadas e categorizadas pelos participantes do projeto. Mais informações podem ser encontradas [aqui](https://github.com/roneysco/Fake.br-Corpus) e [aqui](https://sites.icmc.usp.br/taspardo/OpenCor2018-SantosEtAl.pdf).
+
 
 <p>Apesar de haver outras informações nas bases, como nome de autor, título, etc. as informações utilizadas na construção desse projeto foram apenas o texto da notícia e a classificação da notícia em verdadeira ou falsa. Posteriormente, o grupo criou novas features baseadas nos textos, como o número de palavras do texto, por exemplo.</p>
 
@@ -62,6 +63,12 @@ A preparação dos dados pode ser vista em detalhes neste [notebook](https://git
 
 <a name="eda"></a>
 ## Análise Exploratória
+
+Os dados das bases Fake.Br e FakeRecogna foram explorados separadamente para que pudéssemos entender melhor as diferenças entre os assuntos tratados em uma base e outra, o que era esperado, devido a diferença temporal. A análise exploratória completa pode ser vista nesse [notebook](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/visualizations.ipynb). 
+
+Abaixo, as nuvens de palavras de cada um dos datasets. Pode-se notar a variação nos assuntos principais.
+
+![](https://github.com/camilasp/ProjetoMultidisciplinar/blob/main/images/nuvens_de_palavras.png)
 
 <a name="model"></a>
 ## Modelagem e Validação
