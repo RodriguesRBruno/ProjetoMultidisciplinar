@@ -25,7 +25,7 @@ def setup_model(model_name, base_image='xgboost', instance_count=1, instance_typ
     if hyperparams is None:
         # Valores padrão de um lab
         hyperparams={"num_round":"42",
-                     "eval_metric": "auc",
+                     "eval_metric": "map",
                      "objective": "binary:logistic"}
 
     s3_output_location=f"s3://{BUCKET_MODEL}/output/{model_name}"
@@ -58,3 +58,4 @@ def make_prediction(predictor, model_name, threshold=0.5):
         
     y_pred_list = [1 if float(x) >= threshold else 0 for x in y_pred.decode('utf-8').split('\n') if x != '']
     return y_pred_list
+
