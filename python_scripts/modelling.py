@@ -3,6 +3,7 @@ import sagemaker
 import s3fs
 import boto3
 from python_scripts.save_load import BUCKET_MODEL
+import pandas as pd
 
 def create_train_validation_test_sets(model_df, stratify_col, test_size=0.2, random_state=None, validation_size=0.5):
     """
@@ -59,3 +60,28 @@ def make_prediction(predictor, model_name, threshold=0.5):
     y_pred_list = [1 if float(x) >= threshold else 0 for x in y_pred.decode('utf-8').split('\n') if x != '']
     return y_pred_list
 
+def make_prediction_recordio(predictor, model_name, threshold=0.5):
+    fs = s3fs.S3FileSystem()
+    s3_path = f's3://projetointerdisciplinartreinoteste/test/{model_name}.protobuf'
+    
+    with fs.open(s3_path) as protobuf_file:
+        y_pred = predictor.predict(protobuf_file)
+        
+    y_pred_list = [1 if float(x) >= threshold else 0 for x in y_pred.decode('utf-8').split('\n') if x != '']
+    return y_pred_list
+
+def load_batch_results(model_name):
+    """
+    Retorna um DataFrame com resultados de uma previsão feita via batch
+    """
+    fs = s3fs.S3FileSystem()
+
+    records_path = f"s3://{BUCKET_MODEL}/test/batch-out/{model_name}.protobuf.out"
+
+    with fs.open(records_path) as f: 
+        res_str = f.read().decode('utf-8')
+
+    res_list = [eval(a) for a in res_str.split('\n')[:-1]]
+    df_pred = pd.DataFrame(res_list)
+    
+    return df_pred

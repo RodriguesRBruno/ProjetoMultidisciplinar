@@ -47,13 +47,12 @@ def save_df_to_s3_bucket(df, file_name, prefix=None, tipo='bruto'):
         df.to_csv(f's3://{bucket}/{file_name}', encoding='utf-8', index=False)
     
     
-def save_sparse_vector_to_s3_bucket_as_recordio(spvec, filename, tipo='bruto'):
+def save_to_s3_bucket_as_recordio(x, y, prefix, filename, tipo='bruto'):
 
     bucket = __get_bucket(tipo)
-    prefix = filename.split('.')[0]
     data_location = f"{prefix}/{filename}"
     buf = io.BytesIO()
-    write_spmatrix_to_sparse_tensor(buf,spvec)
+    write_spmatrix_to_sparse_tensor(buf,x,y)
     buf.seek(0)
     boto3.resource('s3').Bucket(bucket).Object(data_location).upload_fileobj(buf)
 
