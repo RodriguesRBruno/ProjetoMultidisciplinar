@@ -111,6 +111,6 @@ Para garantir que o modelo está generalizando bem seria importante testar a cla
 
 * [Documentação do modelo built-in XGBoost]( https://docs.aws.amazon.com/sagemaker/latest/dg/xgboost.html ) by AWS
 
-* [Documentação do modelo built-in Linear Learner] ( https://docs.aws.amazon.com/sagemaker/latest/dg/linear-learner.html ) by AWS
+* [Documentação do modelo built-in Linear Learner]( https://docs.aws.amazon.com/sagemaker/latest/dg/linear-learner.html ) by AWS
 
-* [Documentação do modelo built-in Factorization Machines] ( https://docs.aws.amazon.com/sagemaker/latest/dg/fact-machines.html ) by AWS
+* [Documentação do modelo built-in Factorization Machines]( https://docs.aws.amazon.com/sagemaker/latest/dg/fact-machines.html ) by AWS
