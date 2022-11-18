@@ -108,3 +108,9 @@ Para garantir que o modelo está generalizando bem seria importante testar a cla
 * Silva, Renato M., Santos R.L.S, Almeida T.A, and Pardo T.A.S. (2020) "Towards Automatically Filtering Fake News in Portuguese." Expert Systems with Applications, vol 146, p. 113199.
 
 * [Banner Photo]( https://www.pexels.com/photo/white-and-black-letter-blocks-3989901/) by Joshua Miranda
+
+* [Documentação do modelo built-in XGBoost]( https://docs.aws.amazon.com/sagemaker/latest/dg/xgboost.html ) by AWS
+
+* [Documentação do modelo built-in Linear Learner] ( https://docs.aws.amazon.com/sagemaker/latest/dg/linear-learner.html ) by AWS
+
+* [Documentação do modelo built-in Factorization Machines] ( https://docs.aws.amazon.com/sagemaker/latest/dg/fact-machines.html ) by AWS
