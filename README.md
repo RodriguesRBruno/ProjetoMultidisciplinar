@@ -30,14 +30,14 @@
 ## Introdução 
 
 <p>Com o advento da internet, tornou-se possível obter informações não apenas através de jornais, telejornais e rádios, que eram antes os principais fornecedores de notícias. Podemos dizer que tanto o acesso quanto o compartilhamento de informações se tornou muito mais democrático, dando voz àqueles que antes não tinham espaço para compartilhar suas ideologias. Entretanto, essa imensa quantidade de informações disponíveis traz também um grande desafio: como separar fato de opinião e mais importante ainda, como separar uma notícia verdadeira de uma notícia falsa, a chamada fake news?</p>
-<p>Em 2018, o Instituto Mundial de Pesquisa (IPSO) divulgou um estudo intitulado: “Fake news, filter bubbles, post-truth and trust (Notícias falsas, filtro de bolhas, pós-verdade e verdade)”, que revela dados importantes. De acordo com o levantamento, 62% dos entrevistados do Brasil admitiram ter acreditado em notícias falsas, valor acima da média mundial que é de 48%. Apesar de parecerem inofensivas para alguns, as fake news são potencialmente perigosas. No Brasil, em 2014, a disseminação de uma fake news provou uma verdadeira tragédia.  Na ocasião, uma mulher foi linchada até a morte por moradores da cidade de Guarujá, em São Paulo. Fabiane Maria de Jesus tinha 33 anos, era dona de casa, casada, mãe de duas crianças, e foi confundida com uma suposta sequestradora de crianças, cujo retrato falado, que havia sido feito dois anos antes, estava circulando nas redes sociais. E este é apenas um exemplo dos danos que podem ser causados por informações falsas. No âmbito da saúde, por exemplo, a desinformação têm levado muitas pessoas a duvidar da segurança de vacinas, ocasionando o aumento de casos de doenças que estavam controladas devido aos baixos níveis de vacinação da população.</p>
+<p>Em 2018, o Instituto Mundial de Pesquisa (IPSOS) divulgou um estudo intitulado: “Fake news, filter bubbles, post-truth and trust (Notícias falsas, filtro de bolhas, pós-verdade e verdade)”, que revela dados importantes. De acordo com o levantamento, 62% dos entrevistados do Brasil admitiram ter acreditado em notícias falsas, valor acima da média mundial que é de 48%. Apesar de parecerem inofensivas para alguns, as fake news são potencialmente perigosas. No Brasil, em 2014, a disseminação de uma fake news provou uma verdadeira tragédia.  Na ocasião, uma mulher foi linchada até a morte por moradores da cidade de Guarujá, em São Paulo. Fabiane Maria de Jesus tinha 33 anos, era dona de casa, casada, mãe de duas crianças, e foi confundida com uma suposta sequestradora de crianças, cujo retrato falado, que havia sido feito dois anos antes, estava circulando nas redes sociais. E este é apenas um exemplo dos danos que podem ser causados por informações falsas. No âmbito da saúde, por exemplo, a desinformação têm levado muitas pessoas a duvidar da segurança de vacinas, ocasionando o aumento de casos de doenças que estavam controladas devido aos baixos níveis de vacinação da população.</p>
 <p>Levando em consideração esse cenário, surgiram as agências de checagem, que têm por objetivo avaliar o conteúdo postado em diferentes meios de comunicação e informar ao público se a informação veículada é verdadeira.</p>
 <p>Dado o grande volume de dados, algoritmos de machine learning são ferramentas que podem acelerar e contribuir na análise dessa massa de informações, podendo ser usada não só por agências de checagem, mas pelos próprios meios de comunicação, por partidos políticos, entre outros, afim de se descobrir informações falsas divulgadas nas redes.</p>
 
 <a name="objetivo"></a>
 ## Objetivo 
 
-<p> O trabalho realizado propõe a criação de um modelo de machine learning que classifica notícias, objetivando sobretudo destacar o que é conteúdo falso. </p>
+<p> O trabalho realizado propõe a criação de um modelo de machine learning que classifica notícias, objetivando sobretudo descobrir conteúdo falso de forma correta. O objetivo principal da ferramenta de machine learning seria então o de encontrar corretamente as notícias que são fake news. Nesse caso, considerando que mesmo após a classificaçção do modelo há necessidade de checagem por uma equipe, desejamos minimizar a quantidade de falsos positivos, para diminuir o número de notícias a serem validadas como fake, assumindo que os recursos humanos disponíveis são limitados. Pensando nessa estratégia em particular, precisão foi a métrica escolhida na hora de realizar o fine tuning dos modelos testados. </p>
 
 <a name="dados"></a>
 ## Dados 
@@ -115,7 +115,9 @@ Os notebooks com os modelos estão nos links abaixo:
 <a name="conclusao"></a>
 ## Conclusão
 
-Para garantir que o modelo está generalizando bem seria importante testar a classificação de notícias ainda mais recentes e verificar o desempenho das métricas novamente.
+ A enorme quantidade de informações disponíveis nos dias atuais, bem como dos meios de obtenção dessas informações, podem criar a falsa impressão de que estamos bem informados. Entretanto, analisar a qualidade da informação recebida é crucial para que nossas decisões estejam baseadas em fatos. A verificação de notícias é portanto uma necessidade da nossa sociedade atual. A automatização da classificação de notícias pode auxiliar nesse processo de verificação, diminuindo a quantidade de recursos humanos necessários na realização do trabalho, permitindo uma diminuição de gastos e otimização do tempo de realização dessa tarefa.
+
+O modelo desenvolvido pelo grupo conseguiu resultados bastante positivos para o conjunto de notícias coletados. Para garantir que o modelo está generalizando bem, seria importante realizar uma coleta de notícias ainda mais recentes para um novo teste e verificar o desempenho das métricas novamente. Além disso, entendemos para que qualquer modelo que tenha como objetivo a classificação de notícias, é essencial que haja um monitoramento frequente do desempenho, pois as mudanças nos textos a serem analisados tendem a variar muito com o tempo, sendo então necessário o retreinamento do modelo com novos dados.
 
 <a name="ref"></a>
 ## Referências
@@ -125,6 +127,8 @@ Para garantir que o modelo está generalizando bem seria importante testar a cla
 * Fake Recogna database from the [FakeRecogna repository](https://github.com/Gabriel-Lino-Garcia/FakeRecogna)
 
 * [O perigo das fake news]( https://www.tjpr.jus.br/noticias-2-vice/-/asset_publisher/sTrhoYRKnlQe/content/o-perigo-das-fake-news/14797?inheritRedirect=false)
+
+* [Fake news, filter bulbbles, post truth and trust](https://www.ipsos.com/sites/default/files/ct/news/documents/2018-09/fake-news-filter-bubbles-post-truth-and-trust.pdf)
 
 * Monteiro R.A., Santos R.L.S., Pardo T.A.S., de Almeida T.A., Ruiz E.E.S., Vale O.A. (2018) Contributions to the Study of Fake News in Portuguese: New Corpus and Automatic Detection Results. In: Villavicencio A. et al. (eds) Computational Processing of the Portuguese Language. PROPOR 2018. Lecture Notes in Computer Science, vol 11122. Springer, Cham 
 
