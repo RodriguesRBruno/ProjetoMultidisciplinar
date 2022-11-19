@@ -23,7 +23,7 @@
 <p>O tema da base de dados escolhido pelo grupo foi Fake News, por se tratar de um problema atual, relevante e que demanda soluções, tendo em vista os problemas já causados pela disseminação de  informações falsas. Foram escolhidas bases de dados contendo notícias previamente categorizadas como falsas ou verdadeiras com o objetivo de criar uma solução de classificação automatizada dessas notícias, acelerando a detecção das fake news.</p>
 <p>Os dados foram salvos em um bucket na AWS S3, sendo pré-processados e tratados em notebooks no Sagemaker. Com os dados limpos, foi feita uma análise com visualização dos dados e por fim, os textos foram vetorizados para que pudessem ser utilizados em modelos de machine learning.</p>
 <p>Foram treinados modelos para os dois datasets separadamente afim de realizar uma avaliação. Como as bases isoladamente produziram modelos ruins, elas foram unificadas, aumentando assim a variedade de notícias. Os modelos unificados produziram resultados melhores.</p>
-<p> O melhor modelo foi o XXXX que obteve uma precisão de XXXX.</p>
+<p> O melhor resultado foi obtido utulizando-se um modelo Factorization Machine que obteve uma precisão de 93%.</p>
 
 
 <a name="intro"></a>
@@ -57,12 +57,28 @@ Foi feito o upload dos dados para um bucket da Amazon S3. Os arquivos em txt de 
 
 ### Diagrama da Arquitetura de dados:
 
+A infraestrutura utilizada na AWS é consititiu de três Buckets do S3 e uma instância de Notebooks do Sagemaker. 
+
+Os três buckets do S3 utilizados foram:
+* Um bucket para dados brutos. Este bucket foi utilizado para armazenar arquivos `.zip` baixados do repositório Fake.br-Corpus contendo todos os arquivos .txt do Dataset. Neste bucket também foi salvo um arquivo `.csv` contendo os textos destes arquivos `.zip` sem nenhum processamento adicional além de sua compilação.
+* Um bucket para dados processados. Aqui foram salvos arquivos `.csv` com dados processados de cada um dos dois datasets estudados no projeto: Fake.br-Corpus e FakeRecogna. Também foi salvo um arquivo com dados processados obtidos ao se combinar os dois datasets.
+* Um bucket utilizado para dados de treinamento, teste e validação de modelos. Este bucket possui subpastas para auxiliar em sua organização.
+
+A instância de Notebooks do Sagemaker, por sua vez, contou com diversos notebooks, que também estão reproduzidos neste repositório:
+
+* ![prepare_csv.ipynb:](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/prepare_csv.ipynb) Compilação dos arquivos `.txt` crus do Dataset Fake.br-Corpus em um único arquivo `.csv` para posterior processamento.
+* ![preprocessing.ipynb](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/preprocessing.ipynb) Pré-processamento dos dados de ambos datasets utilizados. Aqui também foi criado um dataset combinado, mesclando-se os dois datasets originais.
+* ![model_fakebr.ipynb](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/model_fakebr.ipynb) Treinamento e validação de modelos baseados apenas no dataset Fake.br-Corpus.
+* ![model_fakerecogna.ipynb](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/model_fakerecogna.ipynb) Treinamento e validação de modelos baseados apenas no dataset FakeRecogna.
+* ![model_combinado.ipynb](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/model_combinado.ipynb) Treinamento e validação de modelos baseados apenas no dataset combinado, construído a partir dos datasets Fake.br-Corpus e FakeRecogna.
+
+Uma visão esquemática da infraestrutura utilizada é mostrada a seguir:
 ![](https://github.com/camilasp/ProjetoMultidisciplinar/blob/dev/images/diagrama_arquitetura.png)
 
 <a name="prep"></a>
 ## Preparação dos dados
 
-As bases não apresentavam dados nulos ou faltantes e a preparação dos dados consistiu no processamento dos textos, incluindo a exclusão de pontuação, acentuação, exclusão de stopwords e lemmatização. Para permitir o uso por algoritmos de machine learning, os textos foram vetorizados utilizando o TfidfVectorizer.
+As bases não apresentavam dados nulos ou faltantes e a preparação dos dados consistiu no processamento dos textos, incluindo a exclusão de pontuação, acentuação, exclusão de stopwords e lemmatização. Para permitir o uso por algoritmos de machine learning, os textos foram vetorizados utilizando o TfidfVectorizer. Também foi criado um dataset combinado a partir dos dois datasets estudados para validação de modelos adicionais.
 
 A preparação dos dados pode ser vista em detalhes neste [notebook](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/preprocessing.ipynb).
 
@@ -81,13 +97,17 @@ Abaixo, as nuvens de palavras de cada um dos datasets. Pode-se notar a variaçã
 
 Usamos como modelo base o XGBoost do Sagemaker.Primeiro, utilizamos os datasets separadamente para treinar dois modelos, usando como teste um dataset de testes da base treinada e também um dataset de teste da outra base. Quando testamos amostras de uma base no modelo treinado com amostras da outra base, os resultados não foram bons, enquanto que nos testes feitos com amostras das próprias bases, em cada caso, os resultados eram excelentes. A principal razão para isso é a diferença no conteúdo das bases, que apresentam notícias de períodos diferentes, sendo uma mais recente e mais abrangente.  
 
-Usamos então o XGBoost para treinar outro modelo, agora com todos os dados e os resultados obtidos foram muito bons. Aparentemente, o modelo conseguiu generalizar melhor.
+O modelo XGBoost foi então treinado em um dataset construído combinando-se os dois datasets utilizados no projeto. Os resultados obtidos foram muito bons, de forma que este modelo foi escolhido para se efetuar a tunagem de hiperparâmetros. Aparentemente, o modelo conseguiu generalizar melhor.
 
-Foram treinados então outros modelos...
-* falta treinar outros modelos
-* falta a parte de validação cruzada/gridsearch
+Foram treinados então outros dois modelos, apenas na base de dados combinada e também com tunagem de hiperparâmetros:
+* Um modelo Linear Learner, escolhido para ser um baseline, uma vez que é um modelo mais simples. Como esperado, sua performance foi inferior ao modelo XGBoost.
+* Um modelo Factorization Machines. Sua documentação na AWS indica que esta é uma aprimoração de modelo linear otimizada para dados de matrizes esparsas, que é a situação do presente projeto após a aplicação da vetorização TF-IDF. Este modelo apresentou desempenho semelhante ao modelo XGBoost, sendo ligeiramente melhor na métrica de precisão, adotada como métrica de interesse do projeto, e ligeiramente pior em recall e F1-score. Desta forma, este é foi considerado o melhor modelo no presente projeto.
 
 Os notebooks com os modelos estão nos links abaixo:
+* ![model_fakebr.ipynb](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/model_fakebr.ipynb) Modelos XGBoost baseados no dataset Fake.br-Corpus.
+* ![model_fakerecogna.ipynb](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/model_fakerecogna.ipynb) Modelo XGBoost baseados no dataset FakeRecogna.
+* ![model_combinado.ipynb](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/model_combinado.ipynb) Modelos XGBoost, LinearLearner e Factorization Machines baseados no Dataset combinado.
+
 
 <a name="conclusao"></a>
 ## Conclusão
