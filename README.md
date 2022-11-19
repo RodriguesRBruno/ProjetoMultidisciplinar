@@ -66,11 +66,11 @@ Os três buckets do S3 utilizados foram:
 
 A instância de Notebooks do Sagemaker, por sua vez, contou com diversos notebooks, que também estão reproduzidos neste repositório:
 
-* ![prepare_csv.ipynb:](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/prepare_csv.ipynb) Compilação dos arquivos `.txt` crus do Dataset Fake.br-Corpus em um único arquivo `.csv` para posterior processamento.
-* ![preprocessing.ipynb](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/preprocessing.ipynb) Pré-processamento dos dados de ambos datasets utilizados. Aqui também foi criado um dataset combinado, mesclando-se os dois datasets originais.
-* ![model_fakebr.ipynb](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/model_fakebr.ipynb) Treinamento e validação de modelos baseados apenas no dataset Fake.br-Corpus.
-* ![model_fakerecogna.ipynb](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/model_fakerecogna.ipynb) Treinamento e validação de modelos baseados apenas no dataset FakeRecogna.
-* ![model_combinado.ipynb](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/model_combinado.ipynb) Treinamento e validação de modelos baseados apenas no dataset combinado, construído a partir dos datasets Fake.br-Corpus e FakeRecogna.
+* [prepare_csv.ipynb:](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/prepare_csv.ipynb) Compilação dos arquivos `.txt` crus do Dataset Fake.br-Corpus em um único arquivo `.csv` para posterior processamento.
+* [preprocessing.ipynb](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/preprocessing.ipynb) Pré-processamento dos dados de ambos datasets utilizados. Aqui também foi criado um dataset combinado, mesclando-se os dois datasets originais.
+* [model_fakebr.ipynb](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/model_fakebr.ipynb) Treinamento e validação de modelos baseados apenas no dataset Fake.br-Corpus.
+* [model_fakerecogna.ipynb](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/model_fakerecogna.ipynb) Treinamento e validação de modelos baseados apenas no dataset FakeRecogna.
+* [model_combinado.ipynb](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/model_combinado.ipynb) Treinamento e validação de modelos baseados apenas no dataset combinado, construído a partir dos datasets Fake.br-Corpus e FakeRecogna.
 
 Uma visão esquemática da infraestrutura utilizada é mostrada a seguir:
 ![](https://github.com/camilasp/ProjetoMultidisciplinar/blob/dev/images/diagrama_arquitetura.png)
@@ -107,9 +107,9 @@ Foram treinados então outros dois modelos, apenas na base de dados combinada e 
 * Um modelo Factorization Machines. Sua documentação na AWS indica que esta é uma aprimoração de modelo linear otimizada para dados de matrizes esparsas, que é a situação do presente projeto após a aplicação da vetorização TF-IDF. Este modelo apresentou desempenho semelhante ao modelo XGBoost, sendo ligeiramente melhor na métrica de precisão, adotada como métrica de interesse do projeto, e ligeiramente pior em recall e F1-score. Desta forma, este é foi considerado o melhor modelo no presente projeto.
 
 Os notebooks com os modelos estão nos links abaixo:
-* ![model_fakebr.ipynb](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/model_fakebr.ipynb) Modelos XGBoost baseados no dataset Fake.br-Corpus.
-* ![model_fakerecogna.ipynb](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/model_fakerecogna.ipynb) Modelo XGBoost baseados no dataset FakeRecogna.
-* ![model_combinado.ipynb](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/model_combinado.ipynb) Modelos XGBoost, LinearLearner e Factorization Machines baseados no Dataset combinado.
+* [model_fakebr.ipynb](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/model_fakebr.ipynb) Modelos XGBoost baseados no dataset Fake.br-Corpus.
+* [model_fakerecogna.ipynb](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/model_fakerecogna.ipynb) Modelo XGBoost baseados no dataset FakeRecogna.
+* [model_combinado.ipynb](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/model_combinado.ipynb) Modelos XGBoost, LinearLearner e Factorization Machines baseados no Dataset combinado.
 
 
 <a name="conclusao"></a>
