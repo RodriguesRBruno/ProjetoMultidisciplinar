@@ -75,6 +75,9 @@ A instância de Notebooks do Sagemaker, por sua vez, contou com diversos noteboo
 Uma visão esquemática da infraestrutura utilizada é mostrada a seguir:
 ![](https://github.com/camilasp/ProjetoMultidisciplinar/blob/dev/images/diagrama_arquitetura.png)
 
+As configurações da instância de notebook utilizada são mostradas a seguir:
+![](https://github.com/camilasp/ProjetoMultidisciplinar/blob/dev/images/notebook_instance_config.png)
+
 <a name="prep"></a>
 ## Preparação dos dados
 
