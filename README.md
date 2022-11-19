@@ -76,7 +76,7 @@ Uma visão esquemática da infraestrutura utilizada é mostrada a seguir:
 ![](https://github.com/camilasp/ProjetoMultidisciplinar/blob/dev/images/diagrama_arquitetura.png)
 
 As configurações da instância de notebook utilizada são mostradas a seguir:
-![](https://github.com/camilasp/ProjetoMultidisciplinar/blob/dev/images/notebook_instance_config.png)
+![](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/images/notebook_instance_config.PNG?raw=true)
 
 <a name="prep"></a>
 ## Preparação dos dados
