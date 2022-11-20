@@ -55,6 +55,9 @@ Mais informações podem ser obtidas no repositório do [projeto](https://github
 
 Foi feito o upload dos dados para um bucket da Amazon S3. Os arquivos em txt de uma das bases foram processados em um notebook no Amazon Sagemaker e salvos em formato csv. Após esse tratamento, os csvs de ambas as bases foram preparados para visualização de dados e modelagem em outro notebook no sagemaker e salvos em um bucket de dados pré-processados. Utilizando os dados pré-processados, foi realizada uma análise de dados e a modelagem, em notebooks separados no Sagemaker. Os modelos treinados foram salvos em um terceiro bucket. Os códigos feitos nos notebooks no sagemaker foram disponibilizados no github.
 
+As funções criadas para conversão dos datasets de `.zip` para `.csv` estão neste [arquivo](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/prepare_csv.ipynb).
+
+
 ### Diagrama da Arquitetura de dados:
 
 A infraestrutura utilizada na AWS é consititiu de três Buckets do S3 e uma instância de Notebooks do Sagemaker. 
@@ -78,18 +81,19 @@ Uma visão esquemática da infraestrutura utilizada é mostrada a seguir:
 As configurações da instância de notebook utilizada são mostradas a seguir:
 ![](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/images/notebook_instance_config.PNG?raw=true)
 
+
 <a name="prep"></a>
 ## Preparação dos dados
 
 As bases não apresentavam dados nulos ou faltantes e a preparação dos dados consistiu no processamento dos textos, incluindo a exclusão de pontuação, acentuação, exclusão de stopwords e lemmatização. Para permitir o uso por algoritmos de machine learning, os textos foram vetorizados utilizando o TfidfVectorizer. Também foi criado um dataset combinado a partir dos dois datasets estudados para validação de modelos adicionais.
 
-A preparação dos dados pode ser vista em detalhes neste [notebook](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/preprocessing.ipynb).
+A preparação dos dados pode ser vista em detalhes neste [notebook](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/preprocessing.ipynb). Funcões criadas para o processamento dos textos estão neste [arquivo](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/python_scripts/processing.py).
 
 
 <a name="eda"></a>
 ## Análise Exploratória
 
-Os dados das bases Fake.Br e FakeRecogna foram explorados separadamente para que pudéssemos entender melhor as diferenças entre os assuntos tratados em uma base e outra, o que era esperado, devido a diferença temporal. A análise exploratória completa pode ser vista nesse [notebook](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/visualizations.ipynb). 
+Os dados das bases Fake.Br e FakeRecogna foram explorados separadamente para que pudéssemos entender melhor as diferenças entre os assuntos tratados em uma base e outra, o que era esperado, devido a diferença temporal. A análise exploratória completa pode ser vista nesse [notebook](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/visualizations.ipynb). Funções para a construção dos plots estão neste [arquivo](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/python_scripts/plots.py).
 
 Abaixo, as nuvens de palavras de cada um dos datasets. Pode-se notar a variação nos assuntos principais.
 
@@ -110,6 +114,10 @@ Os notebooks com os modelos estão nos links abaixo:
 * [model_fakebr.ipynb](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/model_fakebr.ipynb) Modelos XGBoost baseados no dataset Fake.br-Corpus.
 * [model_fakerecogna.ipynb](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/model_fakerecogna.ipynb) Modelo XGBoost baseados no dataset FakeRecogna.
 * [model_combinado.ipynb](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/model_combinado.ipynb) Modelos XGBoost, LinearLearner e Factorization Machines baseados no Dataset combinado.
+
+As funções utilizadas para separação do dataset em treino, teste e validação, setup dos modelos e outras estão nesse [arquivo](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/python_scripts/modelling.py). 
+
+As funções criadas para carregamento dos dados e para salvar os dados no S3 estão neste [arquivo](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/python_scripts/save_load.py).
 
 
 <a name="conclusao"></a>
