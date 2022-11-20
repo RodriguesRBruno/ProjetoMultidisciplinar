@@ -30,7 +30,7 @@
 ## Introdução 
 
 <p>Com o advento da internet, tornou-se possível obter informações não apenas através de jornais, telejornais e rádios, que eram antes os principais fornecedores de notícias. Podemos dizer que tanto o acesso quanto o compartilhamento de informações se tornou muito mais democrático, dando voz àqueles que antes não tinham espaço para compartilhar suas ideologias. Entretanto, essa imensa quantidade de informações disponíveis traz também um grande desafio: como separar fato de opinião e mais importante ainda, como separar uma notícia verdadeira de uma notícia falsa, a chamada fake news?</p>
-<p>Em 2018, o Instituto Mundial de Pesquisa (IPSOS) divulgou um estudo intitulado: “Fake news, filter bubbles, post-truth and trust (Notícias falsas, filtro de bolhas, pós-verdade e verdade)”, que revela dados importantes. De acordo com o levantamento, 62% dos entrevistados do Brasil admitiram ter acreditado em notícias falsas, valor acima da média mundial que é de 48%. Apesar de parecerem inofensivas para alguns, as fake news são potencialmente perigosas. No Brasil, em 2014, a disseminação de uma fake news provou uma verdadeira tragédia.  Na ocasião, uma mulher foi linchada até a morte por moradores da cidade de Guarujá, em São Paulo. Fabiane Maria de Jesus tinha 33 anos, era dona de casa, casada, mãe de duas crianças, e foi confundida com uma suposta sequestradora de crianças, cujo retrato falado, que havia sido feito dois anos antes, estava circulando nas redes sociais. E este é apenas um exemplo dos danos que podem ser causados por informações falsas. No âmbito da saúde, por exemplo, a desinformação têm levado muitas pessoas a duvidar da segurança de vacinas, ocasionando o aumento de casos de doenças que estavam controladas devido aos baixos níveis de vacinação da população.</p>
+<p>Em 2018, o Instituto Mundial de Pesquisa (IPSOS) divulgou um estudo intitulado: “Fake news, filter bubbles, post-truth and trust (Notícias falsas, filtro de bolhas, pós-verdade e verdade)”, que revela dados importantes. De acordo com o levantamento, 62% dos entrevistados do Brasil admitiram ter acreditado em notícias falsas, valor acima da média mundial que é de 48%. Apesar de parecerem inofensivas para alguns, as fake news são potencialmente perigosas. No Brasil, em 2014, a disseminação de uma fake news provocou uma verdadeira tragédia.  Na ocasião, uma mulher foi linchada até a morte por moradores da cidade de Guarujá, em São Paulo. Fabiane Maria de Jesus tinha 33 anos, era dona de casa, casada, mãe de duas crianças, e foi confundida com uma suposta sequestradora de crianças, cujo retrato falado, que havia sido feito dois anos antes, estava circulando nas redes sociais. E este é apenas um exemplo dos danos que podem ser causados por informações falsas. No âmbito da saúde, por exemplo, a desinformação têm levado muitas pessoas a duvidar da segurança de vacinas, ocasionando um aumento de casos de doenças que estavam controladas, devido aos baixos níveis de vacinação da população.</p>
 <p>Levando em consideração esse cenário, surgiram as agências de checagem, que têm por objetivo avaliar o conteúdo postado em diferentes meios de comunicação e informar ao público se a informação veículada é verdadeira.</p>
 <p>Dado o grande volume de dados, algoritmos de machine learning são ferramentas que podem acelerar e contribuir na análise dessa massa de informações, podendo ser usada não só por agências de checagem, mas pelos próprios meios de comunicação, por partidos políticos, entre outros, afim de se descobrir informações falsas divulgadas nas redes.</p>
 
@@ -41,7 +41,7 @@
 
 <a name="dados"></a>
 ## Dados 
-<p> Os dados utilizados no treinamento e validação dos modelos desenvolvidos são corpus desenvolvidos em Língua Portuguesa já categorizados como noticía verdadeira ou falsa. Os dados estavam em repositórios dos projetos de que fazem parte - descrito abaixo - em arquivos do tipo csv e txt. Os dados foram obtidos das seguintes fontes:</p>
+<p> Os dados utilizados no treinamento e validação dos modelos desenvolvidos são corpus desenvolvidos em Língua Portuguesa já categorizados como noticía verdadeira ou falsa. Os dados estavam em repositórios dos projetos de que fazem parte - descritos abaixo - em arquivos do tipo csv e txt. Os dados foram obtidos das seguintes fontes:</p>
 
 * Fake.Br: trata-se de uma base de dados com 7200 notícias coletadas em 2018 de diferentes agências de notícias, na proporção de 1 notícia fake para 1 verdadeira. As notícias foram coletadas de forma semi-automática com uso de web crawlers, sendo analisadas e categorizadas pelos participantes do projeto. Mais informações podem ser encontradas [aqui](https://github.com/roneysco/Fake.br-Corpus) e [aqui](https://sites.icmc.usp.br/taspardo/OpenCor2018-SantosEtAl.pdf).
 * FakeRecogna: trata-se de uma base com 11,902 amostras de notícias, sendo a maior parte dos anos de 2020 e 2021, sendo que as notícias verdadeiras foram retiradas de sites de agências de notícias renomadas e as fake news foram colhidas de sites de agências de chegagem de fake news brasileiras, na proporção de 1 para 1. As notícias são de assuntos diversos, dentre os quais destacam-se entretenimento, saúde e política.
@@ -54,6 +54,9 @@ Mais informações podem ser obtidas no repositório do [projeto](https://github
 ## Arquitetura e Infraestrutura de Dados
 
 Foi feito o upload dos dados para um bucket da Amazon S3. Os arquivos em txt de uma das bases foram processados em um notebook no Amazon Sagemaker e salvos em formato csv. Após esse tratamento, os csvs de ambas as bases foram preparados para visualização de dados e modelagem em outro notebook no sagemaker e salvos em um bucket de dados pré-processados. Utilizando os dados pré-processados, foi realizada uma análise de dados e a modelagem, em notebooks separados no Sagemaker. Os modelos treinados foram salvos em um terceiro bucket. Os códigos feitos nos notebooks no sagemaker foram disponibilizados no github.
+
+As funções criadas para conversão dos datasets de `.zip` para `.csv` estão neste [arquivo](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/prepare_csv.ipynb).
+
 
 ### Diagrama da Arquitetura de dados:
 
@@ -78,18 +81,19 @@ Uma visão esquemática da infraestrutura utilizada é mostrada a seguir:
 As configurações da instância de notebook utilizada são mostradas a seguir:
 ![](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/images/notebook_instance_config.PNG?raw=true)
 
+
 <a name="prep"></a>
 ## Preparação dos dados
 
 As bases não apresentavam dados nulos ou faltantes e a preparação dos dados consistiu no processamento dos textos, incluindo a exclusão de pontuação, acentuação, exclusão de stopwords e lemmatização. Para permitir o uso por algoritmos de machine learning, os textos foram vetorizados utilizando o TfidfVectorizer. Também foi criado um dataset combinado a partir dos dois datasets estudados para validação de modelos adicionais.
 
-A preparação dos dados pode ser vista em detalhes neste [notebook](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/preprocessing.ipynb).
+A preparação dos dados pode ser vista em detalhes neste [notebook](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/preprocessing.ipynb). Funcões criadas para o processamento dos textos estão neste [arquivo](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/python_scripts/processing.py).
 
 
 <a name="eda"></a>
 ## Análise Exploratória
 
-Os dados das bases Fake.Br e FakeRecogna foram explorados separadamente para que pudéssemos entender melhor as diferenças entre os assuntos tratados em uma base e outra, o que era esperado, devido a diferença temporal. A análise exploratória completa pode ser vista nesse [notebook](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/visualizations.ipynb). 
+Os dados das bases Fake.Br e FakeRecogna foram explorados separadamente para que pudéssemos entender melhor as diferenças entre os assuntos tratados em uma base e outra, o que era esperado, devido a diferença temporal. A análise exploratória completa pode ser vista nesse [notebook](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/visualizations.ipynb). Funções para a construção dos plots estão neste [arquivo](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/python_scripts/plots.py).
 
 Abaixo, as nuvens de palavras de cada um dos datasets. Pode-se notar a variação nos assuntos principais.
 
@@ -100,16 +104,20 @@ Abaixo, as nuvens de palavras de cada um dos datasets. Pode-se notar a variaçã
 
 Usamos como modelo base o XGBoost do Sagemaker. Primeiro, utilizamos os datasets separadamente para treinar dois modelos, usando como teste um dataset de testes da base treinada e também um dataset de teste da outra base. Quando testamos amostras de uma base no modelo treinado com amostras da outra base, os resultados não foram bons, enquanto que nos testes feitos com amostras das próprias bases, em cada caso, os resultados eram excelentes. A principal razão para isso é a diferença no conteúdo das bases, que apresentam notícias de períodos diferentes, sendo uma mais recente e mais abrangente.  
 
-O modelo XGBoost foi então treinado em um dataset construído combinando-se os dois datasets utilizados no projeto. Os resultados obtidos foram muito bons, de forma que este modelo foi escolhido para se efetuar a tunagem de hiperparâmetros. Aparentemente, o modelo conseguiu generalizar melhor.
+O modelo XGBoost foi então treinado em um dataset construído combinando-se os dois datasets utilizados no projeto.  Aparentemente, o modelo conseguiu generalizar melhor, pois os resultados obtidos foram muito bons. Por essa razão, esta base de dados, originada pela união dos dois datasets, foi escolhida para realizar os treinamentos posteriores, incluindo um treinamento do mesmo modelo de XGBoost, porém desta vez com fine tuning dos hiperparâmetros.
 
-Foram treinados então outros dois modelos, apenas na base de dados combinada e também com tunagem de hiperparâmetros:
-* Um modelo Linear Learner, escolhido para ser um baseline, uma vez que é um modelo mais simples. Como esperado, sua performance foi inferior ao modelo XGBoost.
-* Um modelo Factorization Machines. Sua documentação na AWS indica que esta é uma aprimoração de modelo linear otimizada para dados de matrizes esparsas, que é a situação do presente projeto após a aplicação da vetorização TF-IDF. Este modelo apresentou desempenho semelhante ao modelo XGBoost, sendo ligeiramente melhor na métrica de precisão, adotada como métrica de interesse do projeto, e ligeiramente pior em recall e F1-score. Desta forma, este é foi considerado o melhor modelo no presente projeto.
+Além disso, foram treinados outros dois modelos com algoritmos diferentes, apenas na base de dados combinada e também com fine tuning de hiperparâmetros:
+* Um modelo Linear Learner, escolhido para ser um baseline, uma vez que é um modelo mais simples. Como esperado, sua performance foi inferior a do modelo XGBoost.
+* Um modelo Factorization Machines. Sua documentação na AWS indica que esta é uma aprimoração de modelo linear otimizada para dados de matrizes esparsas, que é a situação do presente projeto após a aplicação da vetorização TF-IDF. Este modelo apresentou desempenho semelhante ao modelo XGBoost, sendo ligeiramente melhor na métrica de precisão, adotada como métrica de interesse do projeto, e ligeiramente inferior em recall e F1-score. Desta forma, este é foi considerado o modelo de escolha final do presente projeto.
 
 Os notebooks com os modelos estão nos links abaixo:
 * [model_fakebr.ipynb](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/model_fakebr.ipynb) Modelos XGBoost baseados no dataset Fake.br-Corpus.
 * [model_fakerecogna.ipynb](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/model_fakerecogna.ipynb) Modelo XGBoost baseados no dataset FakeRecogna.
 * [model_combinado.ipynb](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/model_combinado.ipynb) Modelos XGBoost, LinearLearner e Factorization Machines baseados no Dataset combinado.
+
+As funções utilizadas para separação do dataset em treino, teste e validação, setup dos modelos e outras estão nesse [arquivo](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/python_scripts/modelling.py). 
+
+As funções criadas para carregamento dos dados e para salvar os dados no S3 estão neste [arquivo](https://github.com/RodriguesRBruno/ProjetoMultidisciplinar/blob/main/notebooks/python_scripts/save_load.py).
 
 
 <a name="conclusao"></a>
