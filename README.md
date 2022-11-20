@@ -37,7 +37,7 @@
 <a name="objetivo"></a>
 ## Objetivo 
 
-<p> O trabalho realizado propõe a criação de um modelo de machine learning que classifica notícias, objetivando sobretudo descobrir conteúdo falso de forma correta. O objetivo principal da ferramenta de machine learning seria então o de encontrar corretamente as notícias que são fake news. Nesse caso, considerando que mesmo após a classificaçção do modelo há necessidade de checagem por uma equipe, desejamos minimizar a quantidade de falsos positivos, para diminuir o número de notícias a serem validadas como fake, assumindo que os recursos humanos disponíveis são limitados. Pensando nessa estratégia em particular, precisão foi a métrica escolhida na hora de realizar o fine tuning dos modelos testados. </p>
+<p> O trabalho realizado propõe a criação de um modelo de machine learning que classifica notícias, objetivando sobretudo descobrir conteúdo falso de forma correta. O objetivo principal da ferramenta de machine learning seria então o de encontrar corretamente as notícias que são fake news. Nesse caso, considerando que mesmo após a classificação do modelo há necessidade de checagem por uma equipe, desejamos minimizar a quantidade de falsos positivos, para diminuir o número de notícias a serem validadas como fake, assumindo que os recursos humanos disponíveis são limitados. Pensando nessa estratégia em particular, precisão foi a métrica escolhida na hora de realizar o fine tuning dos modelos testados. </p>
 
 <a name="dados"></a>
 ## Dados 
@@ -98,7 +98,7 @@ Abaixo, as nuvens de palavras de cada um dos datasets. Pode-se notar a variaçã
 <a name="model"></a>
 ## Modelagem e Validação
 
-Usamos como modelo base o XGBoost do Sagemaker.Primeiro, utilizamos os datasets separadamente para treinar dois modelos, usando como teste um dataset de testes da base treinada e também um dataset de teste da outra base. Quando testamos amostras de uma base no modelo treinado com amostras da outra base, os resultados não foram bons, enquanto que nos testes feitos com amostras das próprias bases, em cada caso, os resultados eram excelentes. A principal razão para isso é a diferença no conteúdo das bases, que apresentam notícias de períodos diferentes, sendo uma mais recente e mais abrangente.  
+Usamos como modelo base o XGBoost do Sagemaker. Primeiro, utilizamos os datasets separadamente para treinar dois modelos, usando como teste um dataset de testes da base treinada e também um dataset de teste da outra base. Quando testamos amostras de uma base no modelo treinado com amostras da outra base, os resultados não foram bons, enquanto que nos testes feitos com amostras das próprias bases, em cada caso, os resultados eram excelentes. A principal razão para isso é a diferença no conteúdo das bases, que apresentam notícias de períodos diferentes, sendo uma mais recente e mais abrangente.  
 
 O modelo XGBoost foi então treinado em um dataset construído combinando-se os dois datasets utilizados no projeto. Os resultados obtidos foram muito bons, de forma que este modelo foi escolhido para se efetuar a tunagem de hiperparâmetros. Aparentemente, o modelo conseguiu generalizar melhor.
 
